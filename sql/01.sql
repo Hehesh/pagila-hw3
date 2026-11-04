@@ -13,6 +13,9 @@
  * Your goal should be to have your queries remain correct even if the data in the database changes arbitrarily.
  */
 
-SELECT count(*) AS count
-FROM customer c JOIN address a USING (address_id) JOIN city ci USING (city_id) JOIN country co USING (country_id)
+SELECT count(c.customer_id) AS count
+FROM customer AS c
+JOIN address AS a ON a.address_id = c.address_id
+JOIN city AS ci ON ci.city_id = a.city_id
+JOIN country AS co ON co.country_id = ci.country_id
 WHERE co.country <> 'United States';
