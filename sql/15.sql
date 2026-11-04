@@ -1,3 +1,7 @@
+ */
+SELECT title, actors
+FROM film_list
+WHERE category = 'Documentary' AND rating = 'G';
 /*
  * Find every documentary film that is rated G.
  * Report the title and the actors.

@@ -1,3 +1,7 @@
+ */
+SELECT f.title
+FROM film f JOIN inventory i USING (film_id) JOIN rental r USING (inventory_id) JOIN (SELECT DISTINCT r.customer_id FROM rental r JOIN inventory i USING (inventory_id) JOIN film f USING (film_id) WHERE f.title = 'BUCKET BROTHERHOOD') b USING (customer_id)
+WHERE f.title <> 'BUCKET BROTHERHOOD' GROUP BY f.title HAVING count(DISTINCT r.customer_id) >= 3;
 /*
  * The film 'BUCKET BROTHERHOOD' is your favorite movie, but you're tired of watching it.
  * You want to find something new to watch that is still similar to 'BUCKET BROTHERHOOD'.
