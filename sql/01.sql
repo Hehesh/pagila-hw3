@@ -1,4 +1,3 @@
- */
 SELECT count(*) AS count
 FROM customer c JOIN address a USING (address_id) JOIN city ci USING (city_id) JOIN country co USING (country_id)
 WHERE co.country <> 'United States';
