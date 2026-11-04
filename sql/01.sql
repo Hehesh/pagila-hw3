@@ -14,7 +14,7 @@
  */
 
 SELECT count(c.customer_id) AS count
-FROM customer AS c
+SELECT count(DISTINCT c.customer_id) AS count
 JOIN address AS a ON a.address_id = c.address_id
 JOIN city AS ci ON ci.city_id = a.city_id
 JOIN country AS co ON co.country_id = ci.country_id
