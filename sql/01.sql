@@ -1,4 +1,3 @@
-SELECT count(*) AS count
 SELECT COUNT(c.customer_id) AS count
 FROM public.customer AS c
 JOIN public.address AS a ON a.address_id = c.address_id
