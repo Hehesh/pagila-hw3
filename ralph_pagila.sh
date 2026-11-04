@@ -34,13 +34,15 @@ question() {
   git show "$QUESTIONS_REF:sql/$1.sql" | sed -n '1,/\*\//p'
 }
 
-instructions='Solve the Pagila homework using the provided schema and original problem descriptions. Only edit SQL solution code under sql/*.sql. Keep the existing problem-description comment blocks intact. Never inspect expected/, results/, raw database rows, or the database contents. Do not hardcode output values. Do not run tests yourself. The harness runs tests and supplies limited diagnostic feedback.'
+instructions='Solve the Pagila homework using the provided schema and original problem descriptions. Only edit SQL solution code under sql/*.sql. Keep the existing problem-description comment blocks intact. Use the supplied CURRENT SQL FILES as exact patch context. Never inspect expected/, results/, raw database rows, or the database contents. Do not hardcode output values. Do not run tests yourself. The harness runs tests and supplies limited diagnostic feedback.'
 
-# Initial generation gets schema + original problem statements, but no expected outputs.
+# Initial generation gets schema, original questions, and current SQL templates, but no expected outputs.
 questions=''
+current_sql=''
 for file in sql/*.sql; do
   id=${file#sql/}; id=${id%.sql}
   questions+=$'\n\n'"PROBLEM $id:"$'\n'"$(question "$id")"
+  current_sql+=$'\n\n'"FILE $file:"$'\n'"$(cat "$file")"
 done
 
 committe "${MODEL_ARGS[@]}" <<PROMPT
@@ -51,6 +53,9 @@ $(cat "$schema")
 
 ORIGINAL QUESTIONS (from $QUESTIONS_REF, not edited working files):
 $questions
+
+CURRENT SQL FILES (exact worktree contents for patch context):
+$current_sql
 
 Implement solutions. Do not remove or alter question comments.
 PROMPT
