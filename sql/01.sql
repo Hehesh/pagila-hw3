@@ -1,9 +1,9 @@
-SELECT COUNT(c.customer_id) AS count
+SELECT COUNT(*) AS count
 FROM public.customer AS c
 JOIN public.address AS a ON a.address_id = c.address_id
 JOIN public.city AS ci ON ci.city_id = a.city_id
 JOIN public.country AS co ON co.country_id = ci.country_id
-WHERE co.country != 'United States';
+WHERE co.country <> 'United States';
  * Compute the number of customers who live outside of the US.
  *
  * NOTE:
