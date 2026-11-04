@@ -1,6 +1,3 @@
- */
-SELECT c.first_name, c.last_name, f.title
-FROM customer c CROSS JOIN LATERAL (SELECT f.title FROM rental r JOIN inventory i USING (inventory_id) JOIN film f USING (film_id) WHERE r.customer_id = c.customer_id ORDER BY r.rental_date DESC LIMIT 1) f;
 /* For each customer, find the movie that they have rented most recently.
  *
  * NOTE:

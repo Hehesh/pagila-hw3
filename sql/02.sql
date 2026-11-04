@@ -1,7 +1,3 @@
- */
-SELECT co.country
-FROM customer c JOIN address a USING (address_id) JOIN city ci USING (city_id) JOIN country co USING (country_id)
-GROUP BY co.country ORDER BY count(*) DESC LIMIT 1;
 /*
  * Compute the country with the most customers in it. 
  */
