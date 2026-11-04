@@ -4,7 +4,7 @@ JOIN public.address AS a ON a.address_id = c.address_id
 JOIN public.city AS ci ON ci.city_id = a.city_id
 JOIN public.country AS co ON co.country_id = ci.country_id
 WHERE co.country <> 'United States';
- * Compute the number of customers who live outside of the US.
+WHERE co.country IS DISTINCT FROM 'United States';
  *
  * NOTE:
  * It is possible to solve this problem with the "cheesy" query
