@@ -7,7 +7,8 @@
  * Do not list 'RUSSELL BACALL', since he has a Bacall Number of 0.
  */
 
-SELECT DISTINCT a.first_name, a.last_name
+SELECT DISTINCT
+  upper(a.first_name || ' ' || a.last_name) AS "Actor Name"
 FROM actor a
 JOIN film_actor fa USING (actor_id)
 WHERE fa.film_id IN (
@@ -15,4 +16,5 @@ WHERE fa.film_id IN (
   JOIN actor ra USING (actor_id)
   WHERE ra.first_name = 'RUSSELL' AND ra.last_name = 'BACALL'
 )
-AND (a.first_name, a.last_name) <> ('RUSSELL', 'BACALL');
+AND (a.first_name, a.last_name) <> ('RUSSELL', 'BACALL')
+ORDER BY "Actor Name";
