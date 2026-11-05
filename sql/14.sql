@@ -14,9 +14,12 @@ WITH rentals AS (
   JOIN inventory i USING (film_id) JOIN rental r USING (inventory_id)
   GROUP BY fc.category_id, f.film_id, f.title
 ), ranked AS (
-  SELECT r.*, rank() OVER (PARTITION BY category_id ORDER BY rented DESC) AS rank
+  SELECT r.*, row_number() OVER (
+    PARTITION BY category_id ORDER BY rented DESC, title
+  ) AS rank
   FROM rentals r
 )
-SELECT c.name AS category, ranked.title, ranked.rented, ranked.rank
+SELECT c.name AS name, ranked.title, ranked.rented AS "total rentals"
 FROM ranked JOIN category c USING (category_id)
 WHERE ranked.rank <= 5;
+ORDER BY c.name, ranked.rank;
