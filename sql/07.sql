@@ -4,7 +4,8 @@
  * but do not include actors that have Bacall Number < 2.
  */
 
-SELECT DISTINCT a.first_name, a.last_name
+SELECT DISTINCT
+  upper(a.first_name || ' ' || a.last_name) AS "Actor Name"
 FROM actor a JOIN film_actor fa USING (actor_id)
 WHERE fa.film_id IN (
   SELECT fa2.film_id
@@ -28,3 +29,4 @@ AND NOT EXISTS (
     AND r.first_name = 'RUSSELL'
     AND r.last_name = 'BACALL'
 );
+ORDER BY "Actor Name";
