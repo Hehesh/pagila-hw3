@@ -21,5 +21,5 @@ JOIN LATERAL (
   ORDER BY r.rental_date DESC
   LIMIT 1
 ) r ON true
-JOIN film f USING (film_id);
+JOIN film f USING (film_id)
 ORDER BY c.last_name, c.first_name;
