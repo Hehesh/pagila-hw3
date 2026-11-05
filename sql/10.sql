@@ -11,14 +11,18 @@
  */
 
 WITH spending AS (
-  SELECT c.customer_id, c.first_name, c.last_name, sum(p.amount) AS total
+  SELECT c.customer_id, upper(c.first_name || ' ' || c.last_name) AS name,
+         sum(p.amount) AS total_payment
   FROM customer c JOIN payment p USING (customer_id)
   GROUP BY c.customer_id, c.first_name, c.last_name
 ), ranked AS (
-  SELECT s.*, ntile(10) OVER (ORDER BY total) AS percentile
+  SELECT s.*, ntile(100) OVER (ORDER BY total_payment) AS percentile
   FROM spending s
 )
-SELECT first_name, last_name, total, percentile
+SELECT customer_id, name, total_payment, percentile
 FROM ranked
 WHERE percentile >= 9
-ORDER BY last_name, first_name;
+ORDER BY name;
+-WHERE percentile >= 9
++WHERE percentile >= 90
+ ORDER BY name;
