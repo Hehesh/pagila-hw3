@@ -12,7 +12,7 @@
  * (or slightly less conveniently with subqueries).
  */
 
-SELECT c.customer_id, c.first_name, c.last_name, f.title, r.rental_date
+SELECT c.first_name, c.last_name, f.title, r.rental_date
 FROM customer c
 JOIN LATERAL (
   SELECT r.*, i.film_id
@@ -22,3 +22,4 @@ JOIN LATERAL (
   LIMIT 1
 ) r ON true
 JOIN film f USING (film_id);
+ORDER BY c.last_name, c.first_name;
