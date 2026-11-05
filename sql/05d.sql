@@ -22,4 +22,5 @@ WHERE target_film.title IN ('AMERICAN CIRCUS', 'ACADEMY DINOSAUR', 'AGENT TRUMAN
 GROUP BY f.film_id, f.title
 HAVING count(*) FILTER (WHERE target_film.title = 'AMERICAN CIRCUS') > 0
    AND count(*) FILTER (WHERE target_film.title = 'ACADEMY DINOSAUR') > 0
-   AND count(*) FILTER (WHERE target_film.title = 'AGENT TRUMAN') > 0;
+   AND count(*) FILTER (WHERE target_film.title = 'AGENT TRUMAN') > 0
+ORDER BY f.title;
