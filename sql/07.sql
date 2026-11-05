@@ -19,4 +19,12 @@ WHERE fa.film_id IN (
     )
   )
 )
-AND NOT EXISTS (SELECT 1 FROM sql06 WHERE false);
+AND NOT EXISTS (
+  SELECT 1
+  FROM film_actor direct
+  JOIN film_actor bacall ON bacall.film_id = direct.film_id
+  JOIN actor r ON r.actor_id = bacall.actor_id
+  WHERE direct.actor_id = a.actor_id
+    AND r.first_name = 'RUSSELL'
+    AND r.last_name = 'BACALL'
+);
