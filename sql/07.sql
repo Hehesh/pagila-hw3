@@ -28,5 +28,5 @@ AND NOT EXISTS (
   WHERE direct.actor_id = a.actor_id
     AND r.first_name = 'RUSSELL'
     AND r.last_name = 'BACALL'
-);
+)
 ORDER BY "Actor Name";
