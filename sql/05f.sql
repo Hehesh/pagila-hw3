@@ -15,7 +15,6 @@ JOIN film_category ac ON ac.category_id = fc.category_id
 JOIN film af ON af.film_id = ac.film_id
 JOIN film_actor fa ON fa.film_id = f.film_id
 WHERE af.title = 'AMERICAN CIRCUS'
-  AND f.title <> 'AMERICAN CIRCUS'
   AND fa.actor_id IN (
     SELECT fa2.actor_id
     FROM film_actor fa2 JOIN film af2 USING (film_id)
