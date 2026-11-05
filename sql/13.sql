@@ -20,6 +20,7 @@ WITH revenue AS (
   SELECT r.*, rank() OVER (PARTITION BY actor_id ORDER BY total DESC) AS rank
   FROM revenue r
 )
-SELECT a.first_name, a.last_name, ranked.title, ranked.total, ranked.rank
+SELECT ranked.actor_id, a.first_name, a.last_name, ranked.film_id,
+       ranked.title, ranked.rank, ranked.total AS revenue
 FROM ranked JOIN actor a USING (actor_id)
 WHERE ranked.rank <= 3;
