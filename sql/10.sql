@@ -20,6 +20,6 @@ WITH spending AS (
   FROM spending s
 )
 SELECT customer_id, name, total_payment, percentile
-FROM ranked
+WHERE percentile >= 90
 +WHERE percentile >= 90
  ORDER BY name;
