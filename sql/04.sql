@@ -16,3 +16,4 @@ WHERE c.name = 'Children'
     JOIN category hc USING (category_id)
     WHERE hfa.actor_id = a.actor_id AND hc.name = 'Horror'
   );
+ORDER BY a.last_name, a.first_name;
