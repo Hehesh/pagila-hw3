@@ -17,7 +17,7 @@ WITH revenue AS (
   JOIN payment p USING (rental_id)
   GROUP BY fa.actor_id, f.film_id, f.title
 ), ranked AS (
-  SELECT r.*, rank() OVER (PARTITION BY actor_id ORDER BY total DESC) AS rank
+  SELECT r.*, row_number() OVER (PARTITION BY actor_id ORDER BY total DESC, film_id) AS rank
   FROM revenue r
 )
 SELECT ranked.actor_id, a.first_name, a.last_name, ranked.film_id,
